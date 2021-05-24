@@ -9,4 +9,4 @@ class Image(models.Model):
     uploaded = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "Image classified at {}".format(self.uploaded.)
+        return "Image classified at {}".format(self.uploaded.strftime("%Y-%m-%d %H:%M"))
