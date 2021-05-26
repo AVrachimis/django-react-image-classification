@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import PostForm from './components/PostForm/PostForm';
 import PostList from './components/PostList/PostList';
+import { Container } from 'react-bootstrap'
 
 class App extends Component {
   state = {
@@ -31,11 +32,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <Container>
         <PostForm />
         <hr />
         <PostList posts={this.state.posts} status={this.state.showPosts} show={this.showPostsHandler} />
-      </div>
+      </Container>
+
     );
   }
 }
