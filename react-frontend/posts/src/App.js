@@ -1,24 +1,32 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Button, Card } from 'react-bootstrap';
+import PostForm from './components/PostForm/PostForm';
+import PostList from './components/PostList/PostList';
 
 class App extends Component {
   state = {
-    text: 'Hello World from the state'
+    posts: [
+      {
+        id: 1,
+        text: 'Hello World'
+      },
+      {
+        id: 2,
+        text: 'Hello again'
+      },
+      {
+        id: 3,
+        text: 'Bye'
+      }
+    ]
   }
 
   render() {
     return (
       <div className="App">
-        <h1>{this.state.text}</h1>
-
-        {this.state.text ?
-          <Button variant='primary' size='lg'>Test Button</Button>
-          :
-          <Button variant='danger' size='lg'>Test Button 2</Button>
-        }
-
-        <Card>Hi there</Card>
+        <PostForm />
+        <hr />
+        <PostList posts={this.state.posts} />
       </div>
     );
   }
