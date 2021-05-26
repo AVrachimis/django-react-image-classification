@@ -18,7 +18,15 @@ class App extends Component {
         id: 3,
         text: 'Bye'
       }
-    ]
+    ],
+
+    showPosts: false
+
+  }
+
+  showPostsHandler = () => {
+    const show = this.state.showPosts
+    this.setState({ showPosts: !show })
   }
 
   render() {
@@ -26,7 +34,7 @@ class App extends Component {
       <div className="App">
         <PostForm />
         <hr />
-        <PostList posts={this.state.posts} />
+        <PostList posts={this.state.posts} status={this.state.showPosts} show={this.showPostsHandler} />
       </div>
     );
   }
