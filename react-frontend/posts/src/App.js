@@ -3,6 +3,7 @@ import './App.css';
 import PostForm from './components/PostForm/PostForm';
 import PostList from './components/PostList/PostList';
 import { Container } from 'react-bootstrap'
+import cuid from 'cuid'
 
 class App extends Component {
   state = {
@@ -30,10 +31,20 @@ class App extends Component {
     this.setState({ showPosts: !show })
   }
 
+  addPost = (text) => {
+    console.log('create ' + text)
+    const new_post = {
+      id: cuid(),
+      text: text,
+    }
+    const posts = [...this.state.posts, new_post]
+    this.setState({ posts })
+  }
+
   render() {
     return (
       <Container>
-        <PostForm />
+        <PostForm add={this.addPost} />
         <hr />
         <PostList posts={this.state.posts} status={this.state.showPosts} show={this.showPostsHandler} />
       </Container>
