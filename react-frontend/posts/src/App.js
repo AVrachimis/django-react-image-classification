@@ -41,12 +41,26 @@ class App extends Component {
     this.setState({ posts })
   }
 
+  deletePostHandler = (id) => {
+    console.log(id)
+    let posts = [...this.state.posts]
+    posts = posts.filter(post => post.id !== id)
+    this.setState({ posts })
+  }
+
   render() {
     return (
       <Container>
         <PostForm add={this.addPost} />
+
         <hr />
-        <PostList posts={this.state.posts} status={this.state.showPosts} show={this.showPostsHandler} />
+
+        <PostList
+          posts={this.state.posts}
+          status={this.state.showPosts}
+          show={this.showPostsHandler}
+          delete={this.deletePostHandler}
+        />
       </Container>
 
     );

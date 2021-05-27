@@ -9,7 +9,11 @@ const PostList = (props) => {
 
             {props.status &&
                 props.posts.map(post => {
-                    return <Post key={post.id} post={post} />
+                    return <Post
+                        key={post.id}
+                        post={post}
+                        delete={props.delete}
+                    />
                 })}
 
         </>
