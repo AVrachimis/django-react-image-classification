@@ -20,11 +20,11 @@ class Classifier extends Component {
 
         return (
             <Dropzone onDrop={this.onDrop}>
-                {({ getRootProps, getInputProps }) => (
+                {({ isDragActive, getRootProps, getInputProps }) => (
                     <section className="container">
                         <div {...getRootProps({ className: 'dropzone back' })}>
                             <input {...getInputProps()} />
-                            <p>Drag 'n' drop some files here, or click to select files</p>
+                            <p>{isDragActive ? "Drop some images" : "Drag 'n' drop some files here, or click to select files"}</p>
                         </div>
                         <aside>
                             <h4>Files</h4>
