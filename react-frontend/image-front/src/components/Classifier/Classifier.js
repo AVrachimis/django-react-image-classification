@@ -1,14 +1,29 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import './Classifier.css'
+import './Classifier.css';
+import { Spinner } from 'react-bootstrap';
 
 class Classifier extends Component {
     state = {
-        files: []
+        files: [],
+        isLoading: false
     }
 
     onDrop = (files) => {
-        this.setState({ files })
+        this.setState({
+            isLoading: true
+        })
+        this.loadingImage(files)
+    }
+
+    loadingImage = (files) => {
+        setTimeout(() => {
+            this.setState({
+                files,
+                isLoading: false
+            })
+        }, 1000);
+
     }
 
     render() {
@@ -30,6 +45,10 @@ class Classifier extends Component {
                             <h4>Files</h4>
                             <ul>{files}</ul>
                         </aside>
+                        {this.state.isLoading &&
+                            <Spinner animation="border" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </Spinner>}
                     </section>
                 )}
             </Dropzone>
