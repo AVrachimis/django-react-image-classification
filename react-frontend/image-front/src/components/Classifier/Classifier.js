@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import './Classifier.css';
-import { Spinner } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 import axios from 'axios'
 class Classifier extends Component {
     state = {
@@ -10,21 +10,23 @@ class Classifier extends Component {
     }
 
 
-    componentDidMount() {
-        this.getImages()
-    }
+    // componentDidMount() {
+    //     this.getImages()
+    // }
 
-    getImages = () => {
-        axios.get('http://127.0.0.1:8000/api/images/', {
-            headers: {
-                'accept': 'application/json'
-            }
-        }).then(resp => {
-            console.log(resp)
-        })
+    // getImages = () => {
+    //     axios.get('http://127.0.0.1:8000/api/images/', {
+    //         headers: {
+    //             'accept': 'application/json'
+    //         }
+    //     }).then(resp => {
+    //         console.log(resp)
+    //     })
 
 
-    }
+    // }
+
+
 
     onDrop = (files) => {
         this.setState({
@@ -38,9 +40,25 @@ class Classifier extends Component {
             this.setState({
                 files,
                 isLoading: false
+            }, () => {
+                console.log(this.state.files[0].name)
             })
         }, 1000);
+    }
 
+
+    sendImage = () => {
+        let formData = new FormData()
+        formData.append('picture', this.state.files[0], this.state.files[0].name)
+        axios.post('http://127.0.0.1:8000/api/images/', formData, {
+            headers: {
+                'accept': 'application/json',
+                'content-type': 'multipart/form-data',
+            }
+        })
+            .then(resp => {
+                console.log(resp)
+            })
     }
 
 
@@ -64,6 +82,9 @@ class Classifier extends Component {
                         <aside>
                             {files}
                         </aside>
+                        {this.state.files.length > 0 &&
+                            <Button variant='info' size='lg' className='mt-3' onClick={this.sendImage}>Select Image</Button>
+                        }
                         {this.state.isLoading &&
                             <Spinner animation="border" role="status">
                                 <span className="sr-only">Loading...</span>

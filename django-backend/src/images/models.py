@@ -16,4 +16,4 @@ class Image(models.Model):
             print('success')
         except:
             print('classification failed')
-        super.save(*args, **kwargs)
+        super().save(*args, **kwargs)
