@@ -39,11 +39,11 @@ class Classifier extends Component {
                     <section className="container">
                         <div {...getRootProps({ className: 'dropzone back' })}>
                             <input {...getInputProps()} />
-                            <p>{isDragActive ? "Drop some images" : "Drag 'n' drop some files here, or click to select files"}</p>
+                            <i className="far fa-images mb-2 text-muted" style={{ fontSize: 100 }}></i>
+                            <p className='text-muted'>{isDragActive ? "Drop some images" : "Drag 'n' drop some files here, or click to select files"}</p>
                         </div>
                         <aside>
-                            <h4>Files</h4>
-                            <ul>{files}</ul>
+                            {files}
                         </aside>
                         {this.state.isLoading &&
                             <Spinner animation="border" role="status">
