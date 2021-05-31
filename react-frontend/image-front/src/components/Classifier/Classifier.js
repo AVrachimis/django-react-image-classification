@@ -59,6 +59,9 @@ class Classifier extends Component {
             .then(resp => {
                 console.log(resp)
             })
+            .catch(err => {
+                console.log('Error Message here: ' + err)
+            })
     }
 
 
