@@ -15,6 +15,7 @@ class Image(models.Model):
 
     def save(self, *args, **kwargs):
         try:
+            print("Classifying...\nPlease Wait")
             img = load_img(self.picture, target_size=(299, 299))
             img_array = img_to_array(img)
             # from299,299,3 to 1,299,299,3

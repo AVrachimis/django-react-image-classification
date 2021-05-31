@@ -46,6 +46,12 @@ class Classifier extends Component {
         }, 1000);
     }
 
+    activateSpinner = () => {
+
+    }
+
+    deact
+
 
     sendImage = () => {
         let formData = new FormData()
@@ -54,6 +60,21 @@ class Classifier extends Component {
             headers: {
                 'accept': 'application/json',
                 'content-type': 'multipart/form-data',
+            }
+        })
+            .then(resp => {
+                this.getImageClass(resp)
+                console.log(resp.data.id)
+            })
+            .catch(err => {
+                console.log('Error Message here: ' + err)
+            })
+    }
+
+    getImageClass = (object) => {
+        axios.get(`http://127.0.0.1:8000/api/images/${object.data.id}/`, {
+            headers: {
+                'accept': 'application/json',
             }
         })
             .then(resp => {
