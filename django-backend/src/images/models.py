@@ -1,6 +1,6 @@
 from django.db import models
 from keras.preprocessing.image import load_img, img_to_array
-
+from numpy import np
 # Create your models here.
 
 
@@ -17,7 +17,7 @@ class Image(models.Model):
             print('success')
             img = load_img(self.picture, target_size=(299, 299))
             img_array = img_to_array(img)
-            print(img_array)
+            pred = np.expand_dimensions(img_array, axis=0)
         except:
             print('classification failed')
         super().save(*args, **kwargs)
