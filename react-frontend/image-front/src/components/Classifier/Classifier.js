@@ -45,15 +45,23 @@ class Classifier extends Component {
             })
         }, 1000);
     }
-
     activateSpinner = () => {
-
+        this.setState({
+            isLoading: true,
+            files: []
+        })
     }
 
-    deact
+    deactivateSpinner = () => {
+        this.setState({
+            isLoading: false,
+        })
+    }
+
 
 
     sendImage = () => {
+        this.activateSpinner()
         let formData = new FormData()
         formData.append('picture', this.state.files[0], this.state.files[0].name)
         axios.post('http://127.0.0.1:8000/api/images/', formData, {
@@ -83,6 +91,7 @@ class Classifier extends Component {
             .catch(err => {
                 console.log('Error Message here: ' + err)
             })
+        this.deactivateSpinner()
     }
 
 
