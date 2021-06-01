@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import './Classifier.css';
-import { Button, Spinner } from 'react-bootstrap';
+import { Alert, Button, Image, Spinner } from 'react-bootstrap';
 import axios from 'axios'
 class Classifier extends Component {
     state = {
         files: [],
-        isLoading: false
+        isLoading: false,
+        recentImage: null,
     }
 
 
@@ -30,7 +31,9 @@ class Classifier extends Component {
 
     onDrop = (files) => {
         this.setState({
-            isLoading: true
+            isLoading: true,
+            files: [],
+            recentImage: null,
         })
         this.loadingImage(files)
     }
@@ -86,6 +89,7 @@ class Classifier extends Component {
             }
         })
             .then(resp => {
+                this.setState({ recentImage: resp })
                 console.log(resp)
             })
             .catch(err => {
@@ -122,6 +126,14 @@ class Classifier extends Component {
                             <Spinner animation="border" role="status">
                                 <span className="sr-only">Loading...</span>
                             </Spinner>}
+                        {this.state.recentImage &&
+                            <React.Fragment>
+                                <Alert variant='primary'>
+                                    {this.state.recentImage.data.classified}
+                                </Alert>
+                                <Image className='justify-content-center' src={this.state.recentImage.data.picture} height='200' rounded />
+
+                            </React.Fragment>}
                     </section>
                 )}
             </Dropzone>
