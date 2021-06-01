@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import Image from './Image';
+
 class ImageList extends Component {
-    state = {}
-
-
+    state = {
+        images: [],
+    }
 
     componentDidMount() {
         this.getImages()
@@ -15,14 +17,21 @@ class ImageList extends Component {
                 'accept': 'application/json'
             }
         }).then(resp => {
+            this.setState({ images: resp.data })
             console.log(resp)
         })
 
 
     }
     render() {
+        const images = this.state.images.map(img => {
+            return <Image key={img.id} pict={img.picture} />
+        })
         return (
-            <h1>ImageList</h1>
+            <div>
+                <h1> ImageList</h1 >
+                {images}
+            </div>
         );
     }
 }
