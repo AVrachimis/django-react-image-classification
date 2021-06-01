@@ -25,7 +25,7 @@ class ImageList extends Component {
     }
     render() {
         const images = this.state.images.map(img => {
-            return <Image key={img.id} pict={img.picture} />
+            return <Image key={img.id} pict={img.picture} name={img.classified} />
         })
         return (
             <div>
