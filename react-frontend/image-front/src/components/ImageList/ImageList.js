@@ -8,6 +8,7 @@ class ImageList extends Component {
         visible: 2,
         isLoading: true,
         newLoaded: false,
+        status: false,
     }
 
     componentDidMount() {
@@ -20,7 +21,10 @@ class ImageList extends Component {
                 'accept': 'application/json'
             }
         }).then(resp => {
-            this.setState({ images: resp.data })
+            this.setState({
+                images: resp.data,
+                status: true
+            })
             console.log(resp)
         })
         this.setState({ isLoading: false })
@@ -47,7 +51,7 @@ class ImageList extends Component {
         return (
             <div>
                 <h1> List of images</h1 >
-                {this.state.images.length === 0 &&
+                {(this.state.images.length === 0) && (this.state.status) &&
                     <h3>No images classified</h3>
                 }
                 {this.state.isLoading ?
@@ -61,7 +65,7 @@ class ImageList extends Component {
                         {(this.state.images.length > this.state.visible) && (this.state.images.length > 2) &&
                             <Button variant='primary' size='lg' onClick={this.handleVisible}>Load more</Button>
                         }
-                        {(this.state.images.length < this.state.visible) && (this.state.images.length > 0) &&
+                        {(this.state.images.length <= this.state.visible) && (this.state.images.length > 0) &&
                             <p>No more images to load</p>}
                     </React.Fragment>
                 }
