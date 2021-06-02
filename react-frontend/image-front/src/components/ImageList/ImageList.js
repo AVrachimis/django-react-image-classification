@@ -66,7 +66,7 @@ class ImageList extends Component {
                             <Button clasName="mb-3" variant='primary' size='lg' onClick={this.handleVisible}>Load more</Button>
                         }
                         {(this.state.images.length <= this.state.visible) && (this.state.images.length > 0) &&
-                            <h3 className="mb-3">No more images to load</h3>}
+                            <p className="mb-3">No more images to load</p>}
                     </React.Fragment>
                 }
             </div>
