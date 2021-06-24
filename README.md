@@ -1,6 +1,6 @@
-## Image Classifier Web App with Django and React
+## Image Classification Web App with Django and React
 
-### Objectives
+### Project Objectives
 - Create a REST API with Django Rest Framework
 - Integrate Keras NN with Django
 - Classify images on the backend using InceptionResNetV2, a Keras pre-trained model
